@@ -1,6 +1,7 @@
 package blake.appkit.http;
 
 public enum StatusCode {
+
     HTTP_200(200, "OK"),
     HTTP_301(301, "Moved Permanently"),
     HTTP_404(404, "Not Found"),

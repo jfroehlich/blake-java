@@ -13,9 +13,9 @@ import blake.appkit.http.Response;
 public class DefaultPage extends Page {
 
     private static final String TEMPLATE = "<!DOCTYPE html><html><head>"
-        + "<meta charset=\"utf-8\" /><title>Welcome</title>"
-        + "</head><body><h1>Welcome to the show.</h1></body>"
-        + "</html>";
+            + "<meta charset=\"utf-8\" /><title>Welcome</title>"
+            + "</head><body><h1>Welcome to the show.</h1></body>"
+            + "</html>";
 
     @Override
     public Response render(Request request) {
