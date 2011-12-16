@@ -4,13 +4,10 @@ import blake.appkit.http.Request;
 import blake.appkit.http.Response;
 import blake.appkit.http.StatusCode;
 import blake.appkit.pages.DefaultPage;
-import blake.appkit.pages.PageResolver;
 import blake.appkit.pages.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.junit.Before;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -19,20 +16,19 @@ public class ApplicationTest {
 
     protected Application application;
     protected Configuration settings;
+    protected List<Path> pages;
 
     @Before
     public void before() {
-        Map<String, String> context = new HashMap<String, String>();
-        Configuration settings = new Configuration(context) {
-
-            private static final long serialVersionUID = 1L;
+        this.pages = new ArrayList<Path>();
+        Configuration config = new Configuration(null) {
 
             @Override
-            public List<List<Object>> getPages() {
-                return new ArrayList<List<Object>>();
+            public List<Path> getPages() {
+                return ApplicationTest.this.pages;
             }
         };
-        application = new Application(settings);
+        application = new Application(config);
     }
 
     @Test
@@ -46,8 +42,7 @@ public class ApplicationTest {
 
     @Test
     public void testLocationResolving() {
-        PageResolver pages = application.getPageResolver();
-        pages.add(new Path("^schnick/(\\d+)/", TestPage.class));
+        pages.add(new Path("^schnick/(\\d+)/", TestPage.class, new Context()));
         Request request = new Request("/schnick/" + System.currentTimeMillis() + "/");
 
         Response response = application.respond(request);
@@ -58,14 +53,13 @@ public class ApplicationTest {
 
     @Test
     public void testFiveLocations() {
-        PageResolver pages = application.getPageResolver();
-        pages.add(new Path("^/schnick/", TestPage.class));
+        pages.add(new Path("^/schnick/", TestPage.class, new Context()));
         pages.addAll(Arrays.asList(
-                new Path("^schnick/$", TestPage.class),
-                new Path("^schnack/$", TestPage.class),
-                new Path("^schnuck/$", TestPage.class),
-                new Path("^bling/blang/$", TestPage.class),
-                new Path("^schnick/schnack/(\\d+)/$", TestPage.class)));
+                new Path("^schnick/$", TestPage.class, new Context()),
+                new Path("^schnack/$", TestPage.class, new Context()),
+                new Path("^schnuck/$", TestPage.class, new Context()),
+                new Path("^bling/blang/$", TestPage.class, new Context()),
+                new Path("^schnick/schnack/(\\d+)/$", TestPage.class, new Context())));
 
         long start = System.currentTimeMillis();
         for (int i = 0; i < 500000; i++) {
@@ -81,19 +75,20 @@ public class ApplicationTest {
 
     @Test
     public void testTenLocations() {
-        PageResolver pages = application.getPageResolver();
-        pages.add(new Path("^/schnick/", TestPage.class));
+        pages.add(new Path("^/schnick/", TestPage.class, new Context()));
         pages.addAll(Arrays.asList(
-                new Path("^schnick/$", TestPage.class),
-                new Path("^schnack/$", TestPage.class),
-                new Path("^schnuck/$", TestPage.class),
-                new Path("^bling/blang/$", TestPage.class),
-                new Path("^bling/blong/$", DefaultPage.class),
-                new Path("^ring/$", TestPage.class),
-                new Path("^blub/$", TestPage.class),
-                new Path("^tada/$", TestPage.class),
-                new Path("^bloing/blang/schnick/$", TestPage.class),
-                new Path("^schnick/schnack/(\\d+)/$", DefaultPage.class)));
+                new Path("^schnick/$", TestPage.class, new Context() {{
+                    put("template", "schnack");
+                }}),
+                new Path("^schnack/$", TestPage.class, new Context()),
+                new Path("^schnuck/$", TestPage.class, new Context()),
+                new Path("^bling/blang/$", TestPage.class, new Context()),
+                new Path("^bling/blong/$", DefaultPage.class, new Context()),
+                new Path("^ring/$", TestPage.class, new Context()),
+                new Path("^blub/$", TestPage.class, new Context()),
+                new Path("^tada/$", TestPage.class, new Context()),
+                new Path("^bloing/blang/schnick/$", TestPage.class, new Context()),
+                new Path("^schnick/schnack/(\\d+)/$", DefaultPage.class, new Context())));
 
         long start = System.currentTimeMillis();
         for (int i = 0; i < 500000; i++) {

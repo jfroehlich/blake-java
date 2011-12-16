@@ -1,23 +1,30 @@
 package blake.appkit;
 
+import blake.appkit.pages.Path;
+import blake.appkit.renderer.Renderer;
+import blake.appkit.renderer.SimpleRenderer;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import javax.servlet.ServletContext;
 
 public abstract class Configuration implements Serializable {
+    
+    public static final String CONTEXT_PATH_KEY = "context_path";
 
     private boolean debug = false;
     private String contextPath = "/";
-    private List<List<Object>> pages = null;
+    protected List<Path> pages = null;
     private String mediaURL = "";
     private String staticURL = "";
-
-    public Configuration(Map<String, String> context) {
-        if (context.containsKey("contextPath")) {
-            contextPath = context.get("contextPath");
+    private Renderer renderer = new SimpleRenderer();
+    
+    public Configuration(ServletContext servletContext) {
+        if (servletContext  != null) {
+            String path = servletContext.getContextPath();
+            contextPath = path.endsWith("/") ? path : String.format("%s/", path);
         }
-        this.pages = new ArrayList<List<Object>>();
+        this.pages = new ArrayList<Path>();
     }
 
     public boolean isDebug() {
@@ -28,9 +35,9 @@ public abstract class Configuration implements Serializable {
         return contextPath;
     }
 
-    public List<List<Object>> getPages() {
+    public List<Path> getPages() {
         if (pages == null) {
-            pages = new ArrayList<List<Object>>();
+            pages = new ArrayList<Path>();
         }
         return pages;
     }
@@ -41,5 +48,9 @@ public abstract class Configuration implements Serializable {
 
     public String getStaticURL() {
         return staticURL;
+    }
+    
+    public Renderer getRenderer() {
+        return renderer;
     }
 }
