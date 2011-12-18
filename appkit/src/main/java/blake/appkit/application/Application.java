@@ -1,5 +1,6 @@
-package blake.appkit;
+package blake.appkit.application;
 
+import blake.appkit.http.PermanentRedirectResponse;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
 import blake.appkit.pages.DefaultPage;
@@ -20,7 +21,7 @@ public class Application implements Serializable {
     
     public Application(Configuration settings) {
         this.settings = settings;
-        pages = new PageResolver(settings.getPages(), settings.getContextPath());
+        pages = new PageResolver(settings.getPages(), settings.getApplicationRoot());
     }
 
     public Response respond(Request request) {
@@ -30,8 +31,16 @@ public class Application implements Serializable {
 
         // TODO Run pre processing code.
 
-        Path location = pages.resolve(request);
+        Path location = pages.resolve(request.getPath());
         if (location == null) {
+            if (! request.getPath().endsWith("/")) {
+                String newPath = request.getPath() + "/";
+                location = pages.resolve(newPath);
+                if (location != null) {
+                    return new PermanentRedirectResponse(newPath);
+                }
+            }
+            
             Context ctx = new Context();
             location = new Path(request.getPath(), NotFoundPage.class, ctx);
         }

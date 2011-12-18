@@ -1,14 +1,13 @@
 package blake.appkit.pages.errors;
 
-import blake.appkit.Configuration;
-import blake.appkit.Context;
+import blake.appkit.application.Configuration;
+import blake.appkit.application.Context;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
-import blake.appkit.http.StatusCode;
-import blake.appkit.pages.Page;
 import blake.appkit.pages.Path;
+import blake.appkit.pages.SimplePage;
 
-public class NotFoundPage extends Page {
+public class NotFoundPage extends SimplePage {
     
     public NotFoundPage(Configuration settings) {
         super(settings);
@@ -16,13 +15,21 @@ public class NotFoundPage extends Page {
     
     @Override
     public Response process(Request request, Context context) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("404 File not found. \n\n");
-        builder.append("Context path: ").append(settings.getContextPath()).append("\n");
-        builder.append("Request path: ").append(request.getPath()).append("\n");
+        context.put("template_path", "blake/templates/404.html");
+        context.put("message", "The requested page could not be found.");
+        context.put("application_root", settings.getApplicationRoot());
+        context.put("request_path", request.getPath());
+        
+        StringBuilder pages = new StringBuilder();
         for (Path path: settings.getPages()) {
-            builder.append(path.getPattern().toString()).append(" \n");
+            pages.append("<li><code>")
+                    .append(path.getPattern().toString())
+                    .append("</code>: ")
+                    .append(path.getPageClass().toString())
+                    .append("</li>");
         }
-        return new Response(StatusCode.HTTP_404, builder.toString());
+        context.put("pages", pages.toString());
+        
+        return super.process(request, context);
     }
 }

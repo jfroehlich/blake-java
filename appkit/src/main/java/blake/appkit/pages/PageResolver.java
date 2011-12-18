@@ -1,6 +1,5 @@
 package blake.appkit.pages;
 
-import blake.appkit.http.Request;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,8 +16,7 @@ public class PageResolver extends ArrayList<Path> {
         addAll(locations);
     }
 
-    public Path resolve(Request request) {
-        String path = request.getPath();
+    public Path resolve(String path) {
         if (!path.startsWith(contextPath)) {
             return null;
         }

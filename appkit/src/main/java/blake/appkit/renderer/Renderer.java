@@ -1,10 +1,17 @@
 package blake.appkit.renderer;
 
-import blake.appkit.Context;
+import blake.appkit.application.Configuration;
+import blake.appkit.application.Context;
 import java.io.Serializable;
 
-public interface Renderer extends Serializable {
-
+public abstract class Renderer implements Serializable {
+    
+    protected final Configuration settings;
+    
+    public Renderer(Configuration settings) {
+        this.settings = settings;
+    }
+    
     /**
      * Finds a template, compiles it, renders it to a String and returns it.
      * 
@@ -12,5 +19,5 @@ public interface Renderer extends Serializable {
      * @param context       The context of the current page.
      * @return              The String returned by the Response.
      */
-    public String render(Context context);
+    public abstract String render(Context context);
 }

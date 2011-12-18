@@ -1,7 +1,7 @@
 package blake.appkit.pages;
 
-import blake.appkit.Configuration;
-import blake.appkit.Context;
+import blake.appkit.application.Configuration;
+import blake.appkit.application.Context;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
 import java.io.Serializable;

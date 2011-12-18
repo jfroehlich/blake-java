@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+
+    <h1>404 File not found</h1>
+    <p>{{ message }}</p>
+    
+    <h2>Request Details</h2>
+    <ul>
+        <li><strong>Application root:</strong> {{ application_root }}</li>
+        <li><strong>Request path:</strong> {{ request_path }}</li>
+    </ul>
+    
+    <h2>Registered Pages</h2>
+    <ul>
+        {{ pages }}
+    </ul>
+    
+</body>
+</html>

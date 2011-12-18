@@ -1,12 +1,13 @@
 package blake.appkit.dispatcher;
 
-import blake.appkit.Application;
-import blake.appkit.Configuration;
+import blake.appkit.application.Application;
+import blake.appkit.application.Configuration;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
@@ -48,8 +49,13 @@ public class ApplicationServlet extends HttpServlet {
         Response response = application.respond(request);
 
         resp.setStatus(response.getStatus().getCode());
+        Map<String, String> headers = response.getHeaders();
+        for (String header: headers.keySet()) {
+            resp.addHeader(header, headers.get(header));
+        }
+        
         PrintWriter writer = resp.getWriter();
-        writer.append(response.getBody());
+        writer.append(response.getContent());
         writer.flush();
     }
 }

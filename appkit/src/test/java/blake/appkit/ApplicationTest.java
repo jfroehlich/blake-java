@@ -1,5 +1,8 @@
 package blake.appkit;
 
+import blake.appkit.application.Configuration;
+import blake.appkit.application.Context;
+import blake.appkit.application.Application;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
 import blake.appkit.http.StatusCode;
@@ -37,7 +40,7 @@ public class ApplicationTest {
         Response response = application.respond(request);
         assertNotNull(response);
         assertEquals(StatusCode.HTTP_200, response.getStatus());
-        assertTrue(response.getBody().isEmpty() == false);
+        assertTrue(response.getContent().isEmpty() == false);
     }
 
     @Test
@@ -48,7 +51,7 @@ public class ApplicationTest {
         Response response = application.respond(request);
         assertNotNull(response);
         assertEquals(StatusCode.HTTP_200, response.getStatus());
-        assertTrue(response.getBody().isEmpty() == false);
+        assertTrue(response.getContent().isEmpty() == false);
     }
 
     @Test
@@ -67,8 +70,8 @@ public class ApplicationTest {
             Response response = application.respond(request);
             assertNotNull(response);
             assertEquals(StatusCode.HTTP_200, response.getStatus());
-            assertTrue(response.getBody().isEmpty() == false);
-            assertTrue(response.getBody().length() > 5);
+            assertTrue(response.getContent().isEmpty() == false);
+            assertTrue(response.getContent().length() > 5);
         }
         System.out.println("five items:" + (System.currentTimeMillis() - start));
     }
@@ -96,7 +99,7 @@ public class ApplicationTest {
             Response response = application.respond(request);
             assertNotNull(response);
             assertEquals(StatusCode.HTTP_200, response.getStatus());
-            assertTrue(response.getBody().isEmpty() == false);
+            assertTrue(response.getContent().isEmpty() == false);
         }
         System.out.println("ten items:" + (System.currentTimeMillis() - start));
     }

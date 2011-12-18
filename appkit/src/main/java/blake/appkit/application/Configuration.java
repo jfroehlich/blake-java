@@ -1,5 +1,7 @@
-package blake.appkit;
+package blake.appkit.application;
 
+import blake.appkit.loaders.ArchiveResourceLoader;
+import blake.appkit.loaders.ResourceLoader;
 import blake.appkit.pages.Path;
 import blake.appkit.renderer.Renderer;
 import blake.appkit.renderer.SimpleRenderer;
@@ -13,17 +15,24 @@ public abstract class Configuration implements Serializable {
     public static final String CONTEXT_PATH_KEY = "context_path";
 
     private boolean debug = false;
-    private String contextPath = "/";
+    
+    protected String contextPath = "/";
+    protected String mediaURL = "";
+    protected String staticURL = "";
+    
+    protected boolean appendSlash = true;
+    
     protected List<Path> pages = null;
-    private String mediaURL = "";
-    private String staticURL = "";
-    private Renderer renderer = new SimpleRenderer();
+    protected Renderer renderer = null;
+    protected ResourceLoader resourceLoader = new ArchiveResourceLoader();
     
     public Configuration(ServletContext servletContext) {
         if (servletContext  != null) {
             String path = servletContext.getContextPath();
             contextPath = path.endsWith("/") ? path : String.format("%s/", path);
+            // loader = new ServletResourceLoader(servletContext);
         }
+        this.renderer = new SimpleRenderer(this);
         this.pages = new ArrayList<Path>();
     }
 
@@ -31,7 +40,7 @@ public abstract class Configuration implements Serializable {
         return debug;
     }
 
-    public String getContextPath() {
+    public String getApplicationRoot() {
         return contextPath;
     }
 
@@ -52,5 +61,13 @@ public abstract class Configuration implements Serializable {
     
     public Renderer getRenderer() {
         return renderer;
+    }
+    
+    public ResourceLoader getResourceLoader() {
+        return resourceLoader;
+    }
+    
+    public boolean appendSlash() {
+        return appendSlash;
     }
 }

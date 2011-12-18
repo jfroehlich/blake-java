@@ -1,21 +1,35 @@
 package blake.appkit.renderer;
 
-import blake.appkit.Context;
-import java.io.InputStream;
+import blake.appkit.application.Configuration;
+import blake.appkit.application.Context;
+import blake.appkit.loaders.ResourceLoader;
+import java.io.IOException;
 import java.util.Map.Entry;
 
-public class SimpleRenderer implements Renderer {
+public class SimpleRenderer extends Renderer {
+
+    public static final String TEMPLATE_PATH_KEY = "template_path";
+
+    public SimpleRenderer(Configuration settings) {
+        super(settings);
+    }
 
     @Override
     public String render(Context context) {
-        assert context.containsKey("template_path"):
-                "The context must contain a field called 'template'!";
-        
-        Template template = new Template(context.get("template"));
-        return template.render(context);
+        assert context.containsKey(TEMPLATE_PATH_KEY) :
+                String.format("The context must contain a field called %s!", TEMPLATE_PATH_KEY);
+
+        try {
+            ResourceLoader loader = settings.getResourceLoader();
+            String str = loader.load(context.get(TEMPLATE_PATH_KEY));
+            return new Template(str).render(context);
+        } catch (IOException ex) {
+            throw new Error("Could not load template!");
+        }
     }
-    
+
     private class Template {
+
         private String str = "";
 
         public Template(String str) {
@@ -25,8 +39,8 @@ public class SimpleRenderer implements Renderer {
         public String render(Context context) {
             StringBuilder builder = new StringBuilder(str);
             for (Entry<String, String> entry : context.entrySet()) {
-                String pattern = "{{" + entry.getKey() + "}}";
-                
+                String pattern = "{{ " + entry.getKey() + " }}";
+
                 int start = -1;
                 while ((start = builder.indexOf(pattern)) != -1) {
                     String value = entry.getValue().toString();

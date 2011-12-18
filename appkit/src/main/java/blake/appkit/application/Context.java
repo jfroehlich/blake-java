@@ -1,4 +1,4 @@
-package blake.appkit;
+package blake.appkit.application;
 
 import java.util.HashMap;
 
