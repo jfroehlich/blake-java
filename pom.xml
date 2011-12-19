@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>blake</groupId>
-    <artifactId>templatekit</artifactId>
+    <artifactId>root</artifactId>
     <version>1.0</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
-    <name>TemplateKit</name>
+    <name>appkit</name>
     <url>http://github.com/jfroehlich/blake-java/</url>
     
     <build>
