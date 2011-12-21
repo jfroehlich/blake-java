@@ -1,4 +1,4 @@
-package blake.templatekit;
+package blake.templatekit.template;
 
 import java.io.Serializable;
 import java.util.Map;
