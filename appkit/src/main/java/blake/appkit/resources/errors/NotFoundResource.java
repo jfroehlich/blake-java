@@ -1,15 +1,24 @@
-package blake.appkit.pages.errors;
+package blake.appkit.resources.errors;
 
 import blake.appkit.application.Configuration;
 import blake.appkit.application.Context;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
-import blake.appkit.pages.Path;
-import blake.appkit.pages.SimplePage;
+import blake.appkit.application.Location;
+import blake.appkit.resources.SimpleResource;
 
-public class NotFoundPage extends SimplePage {
+/**
+ * Default resource for unsuccessful requests.
+ * 
+ * This resource is returned by default when a requested location can not be
+ * resolved by the router. It responds with a HTTP 404 status (File not found) 
+ * and a optional custom message.
+ * 
+ * @author jfroehlich
+ */
+public class NotFoundResource extends SimpleResource {
     
-    public NotFoundPage(Configuration settings) {
+    public NotFoundResource(Configuration settings) {
         super(settings);
     }
     
@@ -21,11 +30,11 @@ public class NotFoundPage extends SimplePage {
         context.put("request_path", request.getPath());
         
         StringBuilder pages = new StringBuilder();
-        for (Path path: settings.getPages()) {
+        for (Location path: settings.getPages()) {
             pages.append("<li><code>")
                     .append(path.getPattern().toString())
                     .append("</code>: ")
-                    .append(path.getPageClass().toString())
+                    .append(path.getResourceClass().toString())
                     .append("</li>");
         }
         context.put("pages", pages.toString());

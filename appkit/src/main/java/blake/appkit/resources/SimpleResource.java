@@ -1,13 +1,21 @@
-package blake.appkit.pages;
+package blake.appkit.resources;
 
 import blake.appkit.application.Configuration;
 import blake.appkit.application.Context;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
 
-public class SimplePage extends Page {
+/**
+ * A very basic resource for default pages.
+ * 
+ * This resource renders a context to a response using the default renderer
+ * from the given configuration.
+ * 
+ * @author jfroehlich
+ */
+public class SimpleResource extends Resource {
     
-    public SimplePage(Configuration settings) {
+    public SimpleResource(Configuration settings) {
         super(settings);
     }
 

@@ -1,17 +1,26 @@
-package blake.appkit.pages.errors;
+package blake.appkit.resources.errors;
 
 import blake.appkit.application.Configuration;
 import blake.appkit.application.Context;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
 import blake.appkit.http.StatusCode;
-import blake.appkit.pages.Page;
+import blake.appkit.resources.Resource;
 
-public class ErrorPage extends Page {
+/**
+ * Default resource for broken responses.
+ * 
+ * This is the default resource displayed when an uncaught exception is 
+ * passed to the application from other resources. It responds with a HTTP 500
+ * status (Internal server error) and a optional custom message.
+ * 
+ * @author jfroehlich
+ */
+public class ErrorResource extends Resource {
 
     public static final String ERROR_MESSAGE_KEY = "error_message";
     
-    public ErrorPage(Configuration settings) {
+    public ErrorResource(Configuration settings) {
         super(settings);
     }
     

@@ -1,4 +1,4 @@
-package blake.appkit.pages;
+package blake.appkit.resources;
 
 import blake.appkit.application.Configuration;
 import blake.appkit.application.Context;
@@ -12,9 +12,9 @@ import blake.appkit.http.Response;
  * is empty. So there is no need to optimize this page for speed.
  *
  */
-public class DefaultPage extends Page {
+public class DefaultResource extends Resource {
     
-    public DefaultPage(Configuration settings) {
+    public DefaultResource(Configuration settings) {
         super(settings);
     }
     

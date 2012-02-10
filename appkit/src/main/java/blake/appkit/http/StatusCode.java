@@ -1,5 +1,10 @@
 package blake.appkit.http;
 
+/**
+ * 
+ * 
+ * @author jfroehlich
+ */
 public enum StatusCode {
 
     HTTP_200 (200, "OK"),

@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ * 
+ * @author jfroehlich
+ */
 public class Response implements Serializable {
     
     protected final Map<String, String> headers;

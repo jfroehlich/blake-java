@@ -2,7 +2,6 @@ package blake.appkit.application;
 
 import blake.appkit.loaders.ArchiveResourceLoader;
 import blake.appkit.loaders.ResourceLoader;
-import blake.appkit.pages.Path;
 import blake.appkit.renderer.Renderer;
 import blake.appkit.renderer.SimpleRenderer;
 import java.io.Serializable;
@@ -10,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletContext;
 
+/**
+ * 
+ * 
+ * @author jfroehlich
+ */
 public abstract class Configuration implements Serializable {
     
     public static final String CONTEXT_PATH_KEY = "context_path";
@@ -22,7 +26,7 @@ public abstract class Configuration implements Serializable {
     
     protected boolean appendSlash = true;
     
-    protected List<Path> pages = null;
+    protected List<Location> pages = null;
     protected Renderer renderer = null;
     protected ResourceLoader resourceLoader = new ArchiveResourceLoader();
     
@@ -33,7 +37,7 @@ public abstract class Configuration implements Serializable {
             // loader = new ServletResourceLoader(servletContext);
         }
         this.renderer = new SimpleRenderer(this);
-        this.pages = new ArrayList<Path>();
+        this.pages = new ArrayList<Location>();
     }
 
     public boolean isDebug() {
@@ -44,9 +48,9 @@ public abstract class Configuration implements Serializable {
         return contextPath;
     }
 
-    public List<Path> getPages() {
+    public List<Location> getPages() {
         if (pages == null) {
-            pages = new ArrayList<Path>();
+            pages = new ArrayList<Location>();
         }
         return pages;
     }

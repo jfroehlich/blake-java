@@ -16,6 +16,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * A dispatcher for JEE servlet containers.
+ * 
+ * This dispatcher creates the application for JEE5 containers like 
+ * Apache Tomcat, Jetty or similar.
+ * 
+ * @author jfroehlich
+ */
 public class ApplicationServlet extends HttpServlet {
 
     private static final Logger log = Logger.getLogger(ApplicationServlet.class.toString());

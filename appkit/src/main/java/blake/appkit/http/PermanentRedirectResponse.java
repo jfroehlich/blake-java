@@ -1,5 +1,10 @@
 package blake.appkit.http;
 
+/**
+ * 
+ * 
+ * @author jfroehlich
+ */
 public class PermanentRedirectResponse extends Response {
 
     public PermanentRedirectResponse(String url) {

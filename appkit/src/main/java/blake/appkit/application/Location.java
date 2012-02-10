@@ -1,16 +1,21 @@
-package blake.appkit.pages;
+package blake.appkit.application;
 
-import blake.appkit.application.Context;
+import blake.appkit.resources.Resource;
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
-public class Path implements Serializable {
+/**
+ * Maps a resource object to a path.
+ * 
+ * @author jfroehlich
+ */
+public class Location implements Serializable {
 
     protected final Pattern pattern;
-    protected final Class<? extends Page> pageClass;
+    protected final Class<? extends Resource> pageClass;
     protected final Context context;
 
-    public Path(String pattern, Class<? extends Page> pageClass, Context context) {
+    public Location(String pattern, Class<? extends Resource> pageClass, Context context) {
         this.pattern = Pattern.compile(pattern);
         this.pageClass = pageClass;
         this.context = context;
@@ -20,7 +25,7 @@ public class Path implements Serializable {
         return pattern;
     }
 
-    public Class<? extends Page> getPageClass() {
+    public Class<? extends Resource> getResourceClass() {
         return pageClass;
     }
     

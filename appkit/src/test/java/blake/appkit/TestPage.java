@@ -4,9 +4,9 @@ import blake.appkit.application.Configuration;
 import blake.appkit.application.Context;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
-import blake.appkit.pages.Page;
+import blake.appkit.resources.Resource;
 
-public class TestPage extends Page {
+public class TestPage extends Resource {
     
     public TestPage(Configuration settings) {
         super(settings);

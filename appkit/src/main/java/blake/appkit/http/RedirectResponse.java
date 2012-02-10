@@ -1,5 +1,10 @@
 package blake.appkit.http;
 
+/**
+ * 
+ * 
+ * @author jfroehlich
+ */
 public class RedirectResponse extends Response {
     
     public RedirectResponse(String url) {
