@@ -18,6 +18,5 @@ public class TestPage extends Resource {
         ctx.put("template", "TIME: {{timestamp}}");
         String str = settings.getRenderer().render(ctx);
         return new Response(str);
-        //return new Response("timestamp:" + System.currentTimeMillis());
     }
 }

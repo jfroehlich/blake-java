@@ -1,7 +1,7 @@
 package blake.appkit.application;
 
-import blake.appkit.loaders.ArchiveResourceLoader;
-import blake.appkit.loaders.ResourceLoader;
+import blake.appkit.loaders.ArchiveFileLoader;
+import blake.appkit.loaders.FileLoader;
 import blake.appkit.renderer.Renderer;
 import blake.appkit.renderer.SimpleRenderer;
 import java.io.Serializable;
@@ -26,9 +26,9 @@ public abstract class Configuration implements Serializable {
     
     protected boolean appendSlash = true;
     
-    protected List<Location> pages = null;
+    protected List<Location> locations = null;
     protected Renderer renderer = null;
-    protected ResourceLoader resourceLoader = new ArchiveResourceLoader();
+    protected FileLoader resourceLoader = new ArchiveFileLoader();
     
     public Configuration(ServletContext servletContext) {
         if (servletContext  != null) {
@@ -37,7 +37,7 @@ public abstract class Configuration implements Serializable {
             // loader = new ServletResourceLoader(servletContext);
         }
         this.renderer = new SimpleRenderer(this);
-        this.pages = new ArrayList<Location>();
+        this.locations = new ArrayList<Location>();
     }
 
     public boolean isDebug() {
@@ -48,11 +48,11 @@ public abstract class Configuration implements Serializable {
         return contextPath;
     }
 
-    public List<Location> getPages() {
-        if (pages == null) {
-            pages = new ArrayList<Location>();
+    public List<Location> getLocations() {
+        if (locations == null) {
+            locations = new ArrayList<Location>();
         }
-        return pages;
+        return locations;
     }
 
     public String getMediaURL() {
@@ -67,7 +67,7 @@ public abstract class Configuration implements Serializable {
         return renderer;
     }
     
-    public ResourceLoader getResourceLoader() {
+    public FileLoader getResourceLoader() {
         return resourceLoader;
     }
     

@@ -29,7 +29,7 @@ public class Application implements Serializable {
 
     public Application(Configuration settings) {
         this.settings = settings;
-        pages = new Router(settings.getPages(), settings.getApplicationRoot());
+        pages = new Router(settings.getLocations(), settings.getApplicationRoot());
     }
     
     public Response respond(Request request) {

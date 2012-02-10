@@ -2,7 +2,7 @@ package blake.appkit.renderer;
 
 import blake.appkit.application.Configuration;
 import blake.appkit.application.Context;
-import blake.appkit.loaders.ResourceLoader;
+import blake.appkit.loaders.FileLoader;
 import java.io.IOException;
 import java.util.Map.Entry;
 
@@ -20,7 +20,7 @@ public class SimpleRenderer extends Renderer {
                 String.format("The context must contain a field called %s!", TEMPLATE_PATH_KEY);
 
         try {
-            ResourceLoader loader = settings.getResourceLoader();
+            FileLoader loader = settings.getResourceLoader();
             String str = loader.load(context.get(TEMPLATE_PATH_KEY));
             return new Template(str).render(context);
         } catch (IOException ex) {

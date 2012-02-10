@@ -30,7 +30,7 @@ public class NotFoundResource extends SimpleResource {
         context.put("request_path", request.getPath());
         
         StringBuilder pages = new StringBuilder();
-        for (Location path: settings.getPages()) {
+        for (Location path: settings.getLocations()) {
             pages.append("<li><code>")
                     .append(path.getPattern().toString())
                     .append("</code>: ")

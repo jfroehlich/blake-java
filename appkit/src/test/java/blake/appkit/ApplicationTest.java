@@ -27,7 +27,7 @@ public class ApplicationTest {
         Configuration config = new Configuration(null) {
 
             @Override
-            public List<Location> getPages() {
+            public List<Location> getLocations() {
                 return ApplicationTest.this.pages;
             }
         };

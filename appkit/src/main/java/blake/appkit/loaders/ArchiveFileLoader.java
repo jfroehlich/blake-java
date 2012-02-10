@@ -7,19 +7,22 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import javax.servlet.ServletContext;
 
-public class ServletResourceLoader implements ResourceLoader {
-    
-    private final ServletContext context;
-    
-    public ServletResourceLoader(ServletContext context) {
-        this.context = context;
-    }
+/**
+ * Loads files from the current web application.
+ * 
+ * This file loader can be used to load resources like templates from the
+ * current web application.
+ * 
+ * @author jfroehlich
+ * 
+ * TODO Check to load files only from inside a specified location root.
+ * TODO Test if this is the prevered way to load files inside servlet containers.
+ */
+public class ArchiveFileLoader implements FileLoader {
 
     @Override
     public String load(String path) throws IOException {
-        String resource = "";
         InputStream stream = getStream(path);
         Writer writer = new StringWriter();
         char[] buffer = new char[1024];
@@ -34,10 +37,11 @@ public class ServletResourceLoader implements ResourceLoader {
         }
         return writer.toString();
     }
-
+    
     @Override
     public InputStream getStream(String path) {
-        return context.getResourceAsStream(path);
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        return loader.getResourceAsStream(path);
     }
     
 }
