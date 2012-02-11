@@ -25,7 +25,7 @@ public class ErrorResponder extends Responder {
     }
     
     @Override
-    public Response process(Request request, Context context) {
+    public Response respond(Request request, Context context) {
         StringBuilder message = new StringBuilder("Internal server error");
         message.append("\n\n");
         if (context.containsKey(ERROR_MESSAGE_KEY)) {

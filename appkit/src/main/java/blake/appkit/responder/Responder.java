@@ -23,5 +23,5 @@ public abstract class Responder implements Serializable {
         this.settings = settings;
     }
     
-    public abstract Response process(Request request, Context context);
+    public abstract Response respond(Request request, Context context) throws Exception;
 }

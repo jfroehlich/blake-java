@@ -4,27 +4,24 @@ import blake.appkit.application.Configuration;
 import blake.appkit.application.Context;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
+import blake.appkit.responder.general.TemplateResponder;
 
 /**
- * Default welcome page.
+ * Responds with a default welcome page.
  * 
- * This page is used when the page is a fresh application and the location store
- * is empty. So there is no need to optimize this page for speed.
+ * This responder is used to render a welcome page when the web application 
+ * has no URL mappings.
  *
  */
-public class DefaultResponder extends Responder {
-    
+public class DefaultResponder extends TemplateResponder {
+        
     public DefaultResponder(Configuration settings) {
         super(settings);
     }
-    
-    private static final String TEMPLATE = "<!DOCTYPE html><html><head>"
-            + "<meta charset=\"utf-8\" /><title>Welcome</title>"
-            + "</head><body><h1>Welcome to the show.</h1></body>"
-            + "</html>";
 
     @Override
-    public Response process(Request request, Context context) {
-        return new Response(TEMPLATE);
+    public Response respond(Request request, Context context) throws Exception{
+        context.put(TEMPLATE_PATH, "blake/templates/default.html");
+        return super.respond(request, context);
     }
 }

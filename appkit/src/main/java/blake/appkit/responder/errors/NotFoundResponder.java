@@ -5,7 +5,7 @@ import blake.appkit.application.Context;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
 import blake.appkit.application.Location;
-import blake.appkit.responder.SimpleResponder;
+import blake.appkit.responder.general.TemplateResponder;
 
 /**
  * Default resource for unsuccessful requests.
@@ -16,15 +16,15 @@ import blake.appkit.responder.SimpleResponder;
  * 
  * @author jfroehlich
  */
-public class NotFoundResponder extends SimpleResponder {
+public class NotFoundResponder extends TemplateResponder {
     
     public NotFoundResponder(Configuration settings) {
         super(settings);
     }
     
     @Override
-    public Response process(Request request, Context context) {
-        context.put("template_path", "blake/templates/404.html");
+    public Response respond(Request request, Context context) throws Exception {
+        context.put(TEMPLATE_PATH, "blake/templates/404.html");
         context.put("message", "The requested page could not be found.");
         context.put("application_root", settings.getApplicationRoot());
         context.put("request_path", request.getPath());
@@ -34,11 +34,10 @@ public class NotFoundResponder extends SimpleResponder {
             pages.append("<li><code>")
                     .append(path.getPattern().toString())
                     .append("</code>: ")
-                    .append(path.getResourceClass().toString())
+                    .append(path.getResponderClass().toString())
                     .append("</li>");
         }
         context.put("pages", pages.toString());
-        
-        return super.process(request, context);
+        return super.respond(request, context);
     }
 }

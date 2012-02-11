@@ -12,13 +12,20 @@ import blake.appkit.responder.Responder;
  */
 public class TemplateResponder extends Responder {
     
+    public static final String TEMPLATE_PATH = "template_path";
+    
     public TemplateResponder(Configuration settings) {
         super(settings);
     }
 
     @Override
-    public Response process(Request request, Context context) {
-        String str = settings.getRenderer().render(context);
+    public Response respond(Request request, Context context) throws Exception {
+        if (!context.containsKey("template_path")) {
+            throw new Exception("Could not find field '" + TEMPLATE_PATH + "' in context.");
+        }
+        
+        String template = settings.getLoader().load(context.get(TEMPLATE_PATH));
+        String str = settings.getRenderer().render(template, context);
         return new Response(str);
     }
 }
