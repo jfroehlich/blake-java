@@ -1,4 +1,4 @@
-package blake.appkit.resources;
+package blake.appkit.responder;
 
 import blake.appkit.application.Configuration;
 import blake.appkit.application.Context;
@@ -13,9 +13,9 @@ import blake.appkit.http.Response;
  * 
  * @author jfroehlich
  */
-public class SimpleResource extends Resource {
+public class SimpleResponder extends Responder {
     
-    public SimpleResource(Configuration settings) {
+    public SimpleResponder(Configuration settings) {
         super(settings);
     }
 

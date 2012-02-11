@@ -17,7 +17,7 @@ public class SimpleRenderer extends Renderer {
     @Override
     public String render(Context context) {
         assert context.containsKey(TEMPLATE_PATH_KEY) :
-                String.format("The context must contain a field called %s!", TEMPLATE_PATH_KEY);
+                String.format("The context must contain a field called '%s'!", TEMPLATE_PATH_KEY);
 
         try {
             FileLoader loader = settings.getResourceLoader();

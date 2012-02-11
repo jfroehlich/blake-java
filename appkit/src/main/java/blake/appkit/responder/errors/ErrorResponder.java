@@ -1,11 +1,11 @@
-package blake.appkit.resources.errors;
+package blake.appkit.responder.errors;
 
 import blake.appkit.application.Configuration;
 import blake.appkit.application.Context;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
 import blake.appkit.http.StatusCode;
-import blake.appkit.resources.Resource;
+import blake.appkit.responder.Responder;
 
 /**
  * Default resource for broken responses.
@@ -16,11 +16,11 @@ import blake.appkit.resources.Resource;
  * 
  * @author jfroehlich
  */
-public class ErrorResource extends Resource {
+public class ErrorResponder extends Responder {
 
     public static final String ERROR_MESSAGE_KEY = "error_message";
     
-    public ErrorResource(Configuration settings) {
+    public ErrorResponder(Configuration settings) {
         super(settings);
     }
     

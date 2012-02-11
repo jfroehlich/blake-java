@@ -6,7 +6,7 @@ import blake.appkit.application.Application;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
 import blake.appkit.http.StatusCode;
-import blake.appkit.resources.DefaultResource;
+import blake.appkit.responder.DefaultResponder;
 import blake.appkit.application.Location;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,12 +86,12 @@ public class ApplicationTest {
                 new Location("^schnack/$", TestPage.class, new Context()),
                 new Location("^schnuck/$", TestPage.class, new Context()),
                 new Location("^bling/blang/$", TestPage.class, new Context()),
-                new Location("^bling/blong/$", DefaultResource.class, new Context()),
+                new Location("^bling/blong/$", DefaultResponder.class, new Context()),
                 new Location("^ring/$", TestPage.class, new Context()),
                 new Location("^blub/$", TestPage.class, new Context()),
                 new Location("^tada/$", TestPage.class, new Context()),
                 new Location("^bloing/blang/schnick/$", TestPage.class, new Context()),
-                new Location("^schnick/schnack/(\\d+)/$", DefaultResource.class, new Context())));
+                new Location("^schnick/schnack/(\\d+)/$", DefaultResponder.class, new Context())));
 
         long start = System.currentTimeMillis();
         for (int i = 0; i < 500000; i++) {

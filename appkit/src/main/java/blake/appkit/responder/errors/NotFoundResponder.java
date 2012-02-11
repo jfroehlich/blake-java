@@ -1,11 +1,11 @@
-package blake.appkit.resources.errors;
+package blake.appkit.responder.errors;
 
 import blake.appkit.application.Configuration;
 import blake.appkit.application.Context;
 import blake.appkit.http.Request;
 import blake.appkit.http.Response;
 import blake.appkit.application.Location;
-import blake.appkit.resources.SimpleResource;
+import blake.appkit.responder.SimpleResponder;
 
 /**
  * Default resource for unsuccessful requests.
@@ -16,9 +16,9 @@ import blake.appkit.resources.SimpleResource;
  * 
  * @author jfroehlich
  */
-public class NotFoundResource extends SimpleResource {
+public class NotFoundResponder extends SimpleResponder {
     
-    public NotFoundResource(Configuration settings) {
+    public NotFoundResponder(Configuration settings) {
         super(settings);
     }
     
