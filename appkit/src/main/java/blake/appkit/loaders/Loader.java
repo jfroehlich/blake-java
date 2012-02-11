@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 
  * @author jfroehlich
  */
-public interface FileLoader extends Serializable {
+public interface Loader extends Serializable {
     
     /**
      * Loads a file and returns it as a string.

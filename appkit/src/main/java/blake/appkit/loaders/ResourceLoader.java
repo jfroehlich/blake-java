@@ -9,17 +9,16 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 /**
- * Loads files from the current web application.
+ * Loads files from the current web archive or java archive.
  * 
- * This file loader can be used to load resources like templates from the
- * current web application.
+ * This loader finds files in the current war or jar and is very useful to load
+ * templates and static files included with the application like default
+ * error pages.
  * 
  * @author jfroehlich
  * 
- * TODO Check to load files only from inside a specified location root.
- * TODO Test if this is the prevered way to load files inside servlet containers.
  */
-public class ArchiveFileLoader implements FileLoader {
+public class ResourceLoader implements Loader {
 
     @Override
     public String load(String path) throws IOException {
