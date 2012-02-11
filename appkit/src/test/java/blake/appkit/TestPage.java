@@ -8,15 +8,17 @@ import blake.appkit.responder.Responder;
 
 public class TestPage extends Responder {
     
+    private static final String TEMPLATE = "timestamp: {{ timestamp }}";
+    
     public TestPage(Configuration settings) {
         super(settings);
     }
 
     @Override
-    public Response process(Request request, Context ctx) {
+    public Response respond(Request request, Context ctx) {
+        String template = 
         ctx.put("timestamp", "" + System.currentTimeMillis());
-        ctx.put("template", "TIME: {{timestamp}}");
-        String str = settings.getRenderer().render(ctx);
+        String str = settings.getRenderer().render(TEMPLATE, ctx);
         return new Response(str);
     }
 }

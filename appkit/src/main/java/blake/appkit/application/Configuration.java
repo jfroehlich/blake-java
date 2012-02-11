@@ -1,7 +1,7 @@
 package blake.appkit.application;
 
-import blake.appkit.loaders.ArchiveFileLoader;
-import blake.appkit.loaders.FileLoader;
+import blake.appkit.loaders.ResourceLoader;
+import blake.appkit.loaders.Loader;
 import blake.appkit.renderer.Renderer;
 import blake.appkit.renderer.SimpleRenderer;
 import java.io.Serializable;
@@ -28,7 +28,7 @@ public abstract class Configuration implements Serializable {
     
     protected List<Location> locations = null;
     protected Renderer renderer = null;
-    protected FileLoader resourceLoader = new ArchiveFileLoader();
+    protected Loader loader = new ResourceLoader();
     
     public Configuration(ServletContext servletContext) {
         if (servletContext  != null) {
@@ -67,8 +67,8 @@ public abstract class Configuration implements Serializable {
         return renderer;
     }
     
-    public FileLoader getResourceLoader() {
-        return resourceLoader;
+    public Loader getLoader() {
+        return loader;
     }
     
     public boolean appendSlash() {

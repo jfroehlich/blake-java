@@ -35,5 +35,5 @@ public abstract class Renderer implements Serializable {
      * @param context       The context of the current page.
      * @return              The String returned by the Response.
      */
-    public abstract String render(Context context);
+    public abstract String render(String template, Context context);
 }
